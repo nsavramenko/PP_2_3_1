@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Users List</title>
+</head>
+<body>
+<h1>User List</h1>
+<div>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each ="user : ${users}">
+            <td><a th:href="@{/users/{id}(id=${user.getId()})}" th:utext="${user.getId()}">...</a></td>
+            <td th:utext="${user.getName()}">...</td>
+            <td th:utext="${user.getSurname()}">...</td>
+            <td th:utext="${user.getDepartment()}">...</td>
+            <td th:utext="${user.getSalary()}">...</td>
+            <td>
+                <a th:href="@{/users/{id}/edit(id=${user.getId()})}">
+                    <input type="submit" value="Edit"/>
+                </a>
+            </td>
+            <td>
+                <form th:method="DELETE" th:action="@{/users/{id}(id=${user.getId()})}">
+                    <input type="submit" value="Delete"/>
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+<br/><br/>
+<div>
+    <nobr>
+        <a th:href="@{/users/new}">Add new User</a>
+    </nobr>
+</div>
+</body>
+</html>
